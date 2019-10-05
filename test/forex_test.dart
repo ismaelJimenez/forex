@@ -73,7 +73,6 @@ void main() {
     expect(quote.keys.length, 0);
   });
 
-
   test('fx - No base', () async {
     final MockClient client = MockClient();
 

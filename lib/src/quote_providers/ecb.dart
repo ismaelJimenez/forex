@@ -27,7 +27,7 @@ class Ecb {
       if (base == 'EUR') {
         fxQuotes.forEach((String key, num value) {
           if (quotes.contains(key)) {
-            results[base+key] = value;
+            results[base + key] = value;
           }
         });
       } else {
@@ -35,12 +35,12 @@ class Ecb {
           final num baseQuote = 1 / fxQuotes[base];
 
           if (quotes.contains('EUR')) {
-            results[base+'EUR'] = baseQuote;
+            results[base + 'EUR'] = baseQuote;
           }
 
           fxQuotes.forEach((String key, num value) {
             if (quotes.contains(key)) {
-              results[base+key] = value * baseQuote;
+              results[base + key] = value * baseQuote;
             }
           });
         }
@@ -51,7 +51,7 @@ class Ecb {
     }
 
     for (String symbol in quotes) {
-      if (!results.containsKey(base+symbol)) {
+      if (!results.containsKey(base + symbol)) {
         logger.e('EcbApi: Symbol $symbol not found.');
       }
     }

@@ -25,8 +25,9 @@ class Yahoo {
       // Search in the answer obtained the data corresponding to the symbols.
       // If requested symbol data is found add it to [portfolioQuotePrices].
       for (String symbol in quotes) {
-        if(fxQuotes.containsKey(base + symbol + '=X')) {
-          results[base + symbol] = fxQuotes[base + symbol + '=X']['regularMarketPrice'] as num;
+        if (fxQuotes.containsKey(base + symbol + '=X')) {
+          results[base + symbol] =
+              fxQuotes[base + symbol + '=X']['regularMarketPrice'] as num;
         }
       }
     } on YahooApiException catch (e) {
