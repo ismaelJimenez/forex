@@ -1,53 +1,37 @@
-A Dart plugin for retrieving financial quote prices.
+A Dart plugin for retrieving currency exchange rates.
 
 [![pub package](https://img.shields.io/pub/v/forex.svg)](https://pub.dev/packages/forex)
 [![Build Status](https://travis-ci.org/ismaelJimenez/forex.svg?branch=master)](https://travis-ci.org/ismaelJimenez/forex)
 
-This package provides a set of high-level functions and classes that make it easy to retrieve financial quote information and prices for stocks (Amazon, Google, ...), commodities (Gold, Oil, ...) and crypto-currencies (Bitcoin, Ethereum, ...). It's platform-independent, supports iOS and Android.
+This package provides a set of high-level functions and classes that make it easy to retrieve currency exchange rates. It's platform-independent, supports iOS and Android.
 # Using
 
-The easiest way to use this library is via the top-level functions. They allow you to make quote price requests with minimal hassle:
+The easiest way to use this library is via the top-level functions. They allow you to make currency exchange rate requests with minimal hassle:
 ```dart
-  final Map<String, Map<String, String>> quotePrice =
-      await FinanceQuote.getPrice(
-          quoteProvider: QuoteProvider.yahoo, symbols: <String>['KO']);
+  Map<String, num> quotes = await Forex.fx(
+      quoteProvider: QuoteProvider.yahoo,
+      base: 'USD',
+      quotes: <String>['EUR']);
 
-  print('Number of quotes retrieved: ${quotePrice.keys.length}.');
-  print('Number of attributes retrieved for KO: ${quotePrice['KO'].keys.length}.');
-  print('Current market price for KO: ${quotePrice['KO']['price']}.');
+  print('Number of quotes retrieved: ${quotes.keys.length}.');
+  print('Exchange rate USDEUR: ${quotes['USDEUR']}.');
 ```
 If you're making multiple quote requests to the same server, you can request all of them in a single function call:
 ```dart
-  final Map<String, Map<String, String>> quotePrice =
-      await FinanceQuote.getPrice(
-          quoteProvider: QuoteProvider.yahoo, symbols: <String>['KO', 'GOOG']);
+  quotes = await Forex.fx(
+      quoteProvider: QuoteProvider.ecb,
+      base: 'JPY',
+      quotes: <String>['EUR', 'USD']);
 
-  print('Number of quotes retrieved: ${quotePrice.keys.length}.');
-  print('Number of attributes retrieved for KO: ${quotePrice['KO'].keys.length}.');
-  print('Current market price for KO: ${quotePrice['KO']['price']}.');
-  print('Number of attributes retrieved for GOOG : ${quotePrice['GOOG'].keys.length}.');
-  print('Current market price for KO: ${quotePrice['GOOG']['price']}.');
+  print('Number of quotes retrieved: ${quotes.keys.length}.');
+  print('Exchange rate JPYEUR: ${quotes['JPYEUR']}.');
+  print('Exchange rate JPYUSD: ${quotes['JPYUSD']}.');
 ```  
-  If you want all available quote data from the selected provider, you can request it with the function call:
-```dart  
-  final Map<String, Map<String, dynamic>> cryptoQuoteRaw =
-      await FinanceQuote.getRawData(
-          quoteProvider: QuoteProvider.coincap, symbols: <String>['bitcoin', 'ethereum']);
-
-  print('Number of quotes retrieved: ${cryptoQuoteRaw.keys.length}.');
-  print('Number of attributes retrieved for bitcoin : ${cryptoQuoteRaw['bitcoin'].keys.length}.');
-  print('Current market price for bitcoin: ${cryptoQuoteRaw['bitcoin']['priceUsd']}.');
-  print('Number of attributes retrieved for ethereum: ${cryptoQuoteRaw['ethereum'].keys.length}.');
-  print('Current market price for ethereum: ${cryptoQuoteRaw['ethereum']['priceUsd']}.');
-  ```
   
   # Supported providers
   
+  * European Central Bank (ECB)
   * Yahoo
-  * Morningstar
-  * Coinmarketcap
-  * Coincap
-  * Binance
   
   # TERMS & CONDITIONS
 
