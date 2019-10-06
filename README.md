@@ -1,4 +1,4 @@
-A Dart plugin for retrieving currency exchange rates.
+The fundamental package for retrieving currency exhange rates with Dart.
 
 [![pub package](https://img.shields.io/pub/v/forex.svg)](https://pub.dev/packages/forex)
 [![Build Status](https://travis-ci.org/ismaelJimenez/forex.svg?branch=master)](https://travis-ci.org/ismaelJimenez/forex)
